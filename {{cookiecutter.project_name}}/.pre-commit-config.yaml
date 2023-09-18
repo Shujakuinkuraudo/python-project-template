@@ -17,13 +17,17 @@ repos:
       - id: check-ast
       - id: debug-statements
       - id: check-docstring-first
+  - repo: https://github.com/psf/black
+    rev: 23.9.1
+    hooks:
+    -   id: black
   - repo: local
     hooks:
       - id: flake8
         name: local flake8
         description: wemake-python-styleguide enforcement
         entry: poetry run flake8
-        files: ^({{cookiecutter.project_name}}/|tests/)
+        files: ^({{cookiecutter.project_name}}/)
         args: ["--config=setup.cfg"]
         language: system
         types: [python]
@@ -31,7 +35,7 @@ repos:
         name: local mypy
         description: static type checker
         entry: poetry run mypy
-        files: ^({{cookiecutter.project_name}}/|tests/)
+        files: ^({{cookiecutter.project_name}}/)
         language: system
         types: [python]
       - id: coverage
